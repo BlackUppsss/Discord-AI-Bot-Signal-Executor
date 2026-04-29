@@ -1,0 +1,15 @@
+# Environment variables (SANGAT RAHASIA!)
+.env
+
+# Python Virtual Environment
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# IDEs / OS files
+.vscode/
+.idea/
+.DS_Store
