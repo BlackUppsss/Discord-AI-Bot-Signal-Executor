@@ -1,0 +1,113 @@
+
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+BTC
+SPOT/short SWING DCA
+RISK 1%
+
+ENTRY : 76430
+SL : 78130
+[OUTPUT JSON GEMINI]:
+{
+    "is_signal": true,
+    "action": "OPEN",
+    "position_side": "SHORT",
+    "symbol": "BTCUSDT",
+    "leverage": null,
+    "entry_zone": [
+        76430
+    ],
+    "take_profit": [],
+    "stop_loss": 78130,
+    "order_type": "LIMIT",
+    "reason": "The text provides an entry point, stop loss, and position side for BTC, indicating an instruction to open a new short position."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+BTC
+SPOT/short SWING DCA
+RISK 1%
+
+ENTRY : 76530
+SL : 78130
+[OUTPUT JSON GEMINI]:
+{
+    "is_signal": true,
+    "action": "OPEN",
+    "position_side": "SHORT",
+    "symbol": "BTCUSDT",
+    "leverage": null,
+    "entry_zone": [
+        76530
+    ],
+    "take_profit": [],
+    "stop_loss": 78130,
+    "order_type": "LIMIT",
+    "reason": "Teks ini berisi instruksi untuk membuka posisi short BTC dengan entry dan stop loss yang spesifik."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+BTC
+SPOT/short SWING DCA
+RISK 1%
+
+ENTRY : 77530
+SL : 78130
+[OUTPUT JSON GEMINI]:
+{"error": "Gagal memproses dengan AI: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}" }
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+BTC
+SPOT/short SWING DCA
+RISK 1%
+
+ENTRY : 77530
+SL : 78130
+[OUTPUT JSON GEMINI]:
+{
+    "is_signal": true,
+    "action": "OPEN",
+    "position_side": "SHORT",
+    "symbol": "BTCUSDT",
+    "leverage": null,
+    "entry_zone": [
+        77530
+    ],
+    "take_profit": [],
+    "stop_loss": 78130,
+    "order_type": "LIMIT",
+    "reason": "Teks berisi instruksi untuk membuka posisi SHORT baru dengan titik masuk dan stop loss yang spesifik."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+BTC
+SPOT/short SWING DCA
+RISK 1%
+
+ENTRY : 77530
+SL : 78130
+[OUTPUT JSON GEMINI]:
+{
+    "is_signal": true,
+    "action": "OPEN",
+    "position_side": "SHORT",
+    "symbol": "BTCUSDT",
+    "leverage": null,
+    "entry_zone": [
+        77530
+    ],
+    "take_profit": [],
+    "stop_loss": 78130,
+    "order_type": "LIMIT",
+    "reason": "Teks berisi perintah buka posisi baru dengan titik masuk dan stop loss yang jelas."
+}
+--------------------------------------------------

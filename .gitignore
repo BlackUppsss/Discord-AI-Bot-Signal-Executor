@@ -1,4 +1,4 @@
-# Environment variables (SANGAT RAHASIA!)
+# Environment variables
 .env
 
 # Python Virtual Environment
@@ -13,3 +13,6 @@ __pycache__/
 .vscode/
 .idea/
 .DS_Store
+
+# Others
+How It Works.md

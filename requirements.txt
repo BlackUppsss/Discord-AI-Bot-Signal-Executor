@@ -1,4 +1,4 @@
 discord.py-self
 python-dotenv
 google-generativeai
-ccxt
+ccxt[async]
