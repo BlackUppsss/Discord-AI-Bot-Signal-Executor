@@ -8,14 +8,14 @@ Cara kerja:
 4. Jika sudah, pindahkan Stop Loss ke harga entry (Break Even) via REST API.
 5. Posisi yang sudah di-BE di-track agar tidak berulang kali di-update.
 
-Dependency: ccxt[async] (di requirements.txt)
+Dependency: ccxt.pro (included in ccxt, lihat requirements.txt)
 Jalankan: python monitor.py  (paralel dengan listener.py)
 """
 
 import os
 import time
 import asyncio
-import ccxt.async_support as ccxt_async
+import ccxt.pro as ccxtpro
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -36,7 +36,7 @@ be_moved: dict[str, bool] = {}
 # ─────────────────────────────────────────────
 # Inisialisasi exchange (async)
 # ─────────────────────────────────────────────
-def build_exchange() -> ccxt_async.bitget:
+def build_exchange() -> ccxtpro.bitget:
     api_key  = os.getenv("BITGET_API_KEY")
     secret   = os.getenv("BITGET_API_SECRET")
     password = os.getenv("BITGET_PASSPHRASE")
@@ -44,7 +44,7 @@ def build_exchange() -> ccxt_async.bitget:
     if not all([api_key, secret, password]):
         raise EnvironmentError("❌  BITGET_API_KEY / SECRET / PASSPHRASE belum diisi di .env!")
 
-    exchange = ccxt_async.bitget({
+    exchange = ccxtpro.bitget({
         "apiKey":          api_key,
         "secret":          secret,
         "password":        password,
@@ -63,7 +63,7 @@ def build_exchange() -> ccxt_async.bitget:
 # ─────────────────────────────────────────────
 # Helper: Fetch semua posisi aktif
 # ─────────────────────────────────────────────
-async def fetch_open_positions(exchange: ccxt_async.bitget) -> list[dict]:
+async def fetch_open_positions(exchange: ccxtpro.bitget) -> list[dict]:
     """
     Kembalikan list posisi aktif dengan field yang kita butuhkan:
     { symbol, side, entry_price, sl_price, size, position_key }
@@ -121,7 +121,7 @@ def check_rr_reached(pos: dict, current_price: float, rr_trigger: float = RR_TRI
 # ─────────────────────────────────────────────
 # Core: Pindahkan SL ke Break Even
 # ─────────────────────────────────────────────
-async def move_sl_to_be(exchange: ccxt_async.bitget, pos: dict):
+async def move_sl_to_be(exchange: ccxtpro.bitget, pos: dict):
     sym   = pos["symbol"]
     side  = pos["side"]
     entry = pos["entry_price"]
@@ -156,7 +156,7 @@ async def move_sl_to_be(exchange: ccxt_async.bitget, pos: dict):
         print(f"🚨 Gagal move SL ke BE untuk {key}: {e}")
 
 
-async def _fallback_set_sl(exchange: ccxt_async.bitget, pos: dict, new_sl: float):
+async def _fallback_set_sl(exchange: ccxtpro.bitget, pos: dict, new_sl: float):
     """Fallback: set SL via create_order."""
     sym   = pos["symbol"]
     side  = pos["side"]
@@ -187,7 +187,10 @@ async def _fallback_set_sl(exchange: ccxt_async.bitget, pos: dict, new_sl: float
 # ─────────────────────────────────────────────
 # Loop: WebSocket Ticker Watcher
 # ─────────────────────────────────────────────
-async def watch_prices_loop(exchange: ccxt_async.bitget, positions_ref: list[dict]):
+def supports_watch_tickers(exchange: ccxtpro.bitget) -> bool:
+    return bool(getattr(exchange, "has", {}).get("watchTickers"))
+
+async def watch_prices_loop(exchange: ccxtpro.bitget, positions_ref: list[dict]):
     """Subscribe ke ticker semua symbol yang aktif."""
     last_symbols = None
     last_print_time = 0.0
@@ -208,6 +211,9 @@ async def watch_prices_loop(exchange: ccxt_async.bitget, positions_ref: list[dic
             last_symbols = symbols
 
         try:
+            if not supports_watch_tickers(exchange):
+                raise ccxtpro.NotSupported(f"{exchange.id} watchTickers() tidak tersedia di ccxt.pro")
+
             tickers = await exchange.watch_tickers(symbols)
 
             for sym, ticker in tickers.items():
@@ -229,11 +235,11 @@ async def watch_prices_loop(exchange: ccxt_async.bitget, positions_ref: list[dic
                     if check_rr_reached(pos, float(current_price)):
                         await move_sl_to_be(exchange, pos)
 
-        except ccxt_async.NetworkError as e:
+        except ccxtpro.NetworkError as e:
             print(f"🔌 WebSocket terputus ({e}), reconnecting dalam 5 detik...")
             await asyncio.sleep(5)
 
-        except ccxt_async.ExchangeError as e:
+        except ccxtpro.ExchangeError as e:
             print(f"⚠️ Exchange error: {e}")
             await asyncio.sleep(5)
 
@@ -245,7 +251,7 @@ async def watch_prices_loop(exchange: ccxt_async.bitget, positions_ref: list[dic
 # ─────────────────────────────────────────────
 # Loop: Refresh Daftar Posisi Periodik
 # ─────────────────────────────────────────────
-async def fetch_positions_loop(exchange: ccxt_async.bitget, positions_ref: list[dict]):
+async def fetch_positions_loop(exchange: ccxtpro.bitget, positions_ref: list[dict]):
     """Setiap POLL_INTERVAL detik, refresh daftar posisi aktif."""
     while True:
         try:

@@ -368,3 +368,38 @@ close eth
   "reason": "Perintah untuk menutup posisi ETH."
 }
 --------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+<@&1486006114754625718>
+**☄️**** SCALP SETUP -** SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 79800
+
+🔖 **ENTRY REASON :** bear struktur
+
+📌** Risk Adjustment **:  
+__Max Loss / Risk Per Trade 0.5% of Total Trading Balance__
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 79800,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "bear struktur"
+}
+--------------------------------------------------
