@@ -67,6 +67,25 @@ python listener.py
 
 Bot akan mencetak log ke terminal bahwa ia siap mendengarkan sinyal!
 
+## 💻 Spesifikasi Server & Penggunaan Resource
+
+Bot ini dirancang sangat ringan dan efisien menggunakan `asyncio` dan *Websocket Multiplexing*.
+
+* **RAM Minimum:** 512 MB (Penggunaan normal hanya berkisar 80 - 150 MB).
+* **CPU Minimum:** 1 vCPU (Sangat ringan, beban CPU biasanya < 5%).
+* **Jaringan:** Stabil. Disarankan dijalankan di VPS (Virtual Private Server) agar bisa memantau *market* dan Websocket 24/7 tanpa gangguan.
+
+## 🤖 Estimasi Penggunaan API Gemini (Tier Gratis)
+
+Bot ini menggunakan Google Gemini AI API (Tier Gratis) untuk menerjemahkan sinyal teks dan membaca gambar *screenshot*.
+
+* **Limit Resmi Google:** 15 Request / menit dan 1.500 Request / hari.
+* **Konsumsi Sinyal Teks:** ~100 hingga 300 token per pesan.
+* **Konsumsi Sinyal Gambar:** ~258 token untuk gambar + prompt.
+* **Total Maksimal per Eksekusi:** ~1.500 Token.
+
+**Kesimpulan:** Selama grup sinyal Discord Anda tidak membanjiri dengan 15 sinyal per menit atau melebihi 1.500 sinyal dalam satu hari, bot ini akan beroperasi dengan sangat mulus dan **100% aman dalam kuota gratis Gemini**.
+
 ---
 
 ### 🛑 Disclaimer

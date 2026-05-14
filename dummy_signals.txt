@@ -111,3 +111,260 @@ SL : 78130
     "reason": "Teks berisi perintah buka posisi baru dengan titik masuk dan stop loss yang jelas."
 }
 --------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+BTC
+SPOT/short SWING DCA
+RISK 1%
+
+ENTRY : 77530
+SL : 78130
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [
+    77530
+  ],
+  "take_profit": [],
+  "stop_loss": 78130,
+  "order_type": "LIMIT",
+  "tp_percentage": null,
+  "reason": "Sinyal baru untuk buka posisi SHORT BTCUSDT."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+BTC
+SPOT/long SWING DCA
+RISK 1%
+
+ENTRY : 77530
+SL : 78130
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [
+    77530
+  ],
+  "take_profit": [],
+  "stop_loss": 78130,
+  "order_type": "LIMIT",
+  "tp_percentage": null,
+  "reason": "Sinyal buka posisi long untuk BTC dengan harga entry dan stop loss."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+BTC
+SPOT/long SWING DCA
+RISK 1%
+
+ENTRY : 77530
+SL : 76130
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [
+    77530
+  ],
+  "take_profit": [],
+  "stop_loss": 76130,
+  "order_type": "LIMIT",
+  "tp_percentage": null,
+  "reason": "Sinyal untuk membuka posisi long BTC dengan entry dan stop loss yang ditentukan."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+cancel order eth
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CANCEL",
+  "position_side": null,
+  "symbol": "ETHUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": null,
+  "tp_percentage": null,
+  "reason": "Perintah untuk membatalkan order ETH."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+cancel btc
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CANCEL",
+  "position_side": "ALL",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": null,
+  "tp_percentage": null,
+  "reason": "Perintah batalkan semua order untuk BTC."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+long eth now
+sl 2300
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "ETHUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 2300,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Membuka posisi long ETH pada harga pasar dengan stop loss."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "LONG",
+  "symbol": "ETHUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah untuk menutup posisi aktif ETHUSDT."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+btc long now
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal untuk membuka posisi long BTCUSDT secara instan."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+eth long now sl 2200
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "ETHUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 2200,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal untuk membuka posisi long ETHUSDT sekarang dengan stop loss."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+btc long now sl 81000
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 81000,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal untuk membuka posisi long BTCUSDT secara instan dengan stop loss."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+crp long now sl 14400
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "CRPUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 14400,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Open a new long position at market price with a stop loss."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+xrp long now sl 14400
+[OUTPUT JSON GEMINI]:
+{"error": "AI gagal (gemini-1.5-flash): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close eth
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "LONG",
+  "symbol": "ETHUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah untuk menutup posisi ETH."
+}
+--------------------------------------------------

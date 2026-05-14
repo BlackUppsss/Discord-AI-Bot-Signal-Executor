@@ -112,28 +112,48 @@ class SignalListener(discord.Client):
         print(f"[SINYAL MASUK] DITERIMA dari {message.author}:")
         print(content)
         
-        print("\n[AI GEMINI] Memproses sinyal... mohon tunggu...")
+        print("\n[AI GEMINI] Memproses sinyal di background... (pesan baru tetap diterima)")
         
-        bitget_context = await asyncio.to_thread(trading.get_account_context_summary)
+        asyncio.create_task(self._process_signal(content, image_bytes_list, str(message.author)))
 
-        ai_result = await asyncio.to_thread(
-            ai_parser.parse_signal_with_ai, content, image_bytes_list, bitget_context
-        )
+    async def _process_signal(self, content, image_bytes_list, author_name):
+        """Proses sinyal di background agar on_message tidak terblokir."""
+        try:
+            bitget_context = await asyncio.to_thread(trading.get_account_context_summary)
 
-        print("Hasil Analisa JSON:")
-        print(ai_result)
-        print("====================================\n")
-        
-        rotate_log()
+            ai_result = await asyncio.to_thread(
+                ai_parser.parse_signal_with_ai, content, image_bytes_list, bitget_context
+            )
 
-        with open(LOG_FILE, "a", encoding="utf-8") as f:
-            f.write(f"\n\n--- HASIL ANALISA LANGSUNG DARI DISCORD ({message.author}) ---\n")
-            f.write(f"[INPUT PESAN]:\n{content}\n")
-            f.write(f"[OUTPUT JSON GEMINI]:\n{ai_result}\n")
-            f.write("-" * 50)
+            print("Hasil Analisa JSON:")
+            print(ai_result)
+            print("====================================\n")
             
-        if "error" not in ai_result.lower():
-            await asyncio.to_thread(trading.execute_trade, ai_result)
+            rotate_log()
+
+            with open(LOG_FILE, "a", encoding="utf-8") as f:
+                f.write(f"\n\n--- HASIL ANALISA LANGSUNG DARI DISCORD ({author_name}) ---\n")
+                f.write(f"[INPUT PESAN]:\n{content}\n")
+                f.write(f"[OUTPUT JSON GEMINI]:\n{ai_result}\n")
+                f.write("-" * 50)
+                
+            if "error" not in ai_result.lower():
+                trade_result = await asyncio.to_thread(trading.execute_trade, ai_result)
+                if trade_result:
+                    import auto_be
+                    if trade_result.get("action") == "OPEN":
+                        asyncio.create_task(auto_be.price_monitor_task(
+                            trade_result["symbol"],
+                            trade_result["side"],
+                            trade_result["entry_price"],
+                            trade_result["sl_price"],
+                            trade_result.get("order_type", "MARKET")
+                        ))
+                    elif trade_result.get("action") == "CLOSE":
+                        # Matikan monitor seketika saat ada perintah CLOSE dari AI
+                        auto_be.cancel_monitor(trade_result["symbol"])
+        except Exception as e:
+            print(f"🚨 [BACKGROUND ERROR] Gagal proses sinyal: {e}")
 
 if __name__ == '__main__':
     if not USER_TOKEN or not TARGET_CHANNEL_IDS:

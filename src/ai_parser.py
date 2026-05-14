@@ -55,7 +55,7 @@ Output JSON:
 
 Panduan action:
 - OPEN: Sinyal buka posisi baru (long/short).
-- CLOSE: Perintah tutup posisi yang sudah ada ("close", "tutup", "keluar", "exit").
+- CLOSE: Perintah tutup posisi/cutloss ("close", "cut", "cutloss", "cl", "tutup", "keluar", "exit").
 - CANCEL: Perintah batalkan order yang belum terisi ("cancel", "batal", "hapus order").
 - MOVE_SL: Perintah pindahkan SL ("pindah SL", "SL ke ...", "geser SL", "SL baru", "move SL"). Isi stop_loss dengan harga SL baru.
 - TAKE_PROFIT: Perintah ambil profit sebagian/penuh ("TP", "take profit", "ambil profit"). Isi tp_percentage (default 100).
@@ -77,7 +77,7 @@ Hasilkan HANYA JSON murni."""
                     part = types.Part.from_bytes(data=img_info, mime_type="image/png")
                 contents.append(part)
         
-        models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash']
+        models_to_try = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro']
         
         for attempt in range(MAX_RETRIES):
             for model_name in models_to_try:
@@ -97,16 +97,23 @@ Hasilkan HANYA JSON murni."""
                 except Exception as e:
                     error_str = str(e)
                     print(f"⚠️ {model_name}: {error_str}")
-                    if "503" in error_str or "429" in error_str or "UNAVAILABLE" in error_str:
+                    if any(code in error_str for code in ["429", "503", "404", "UNAVAILABLE", "NOT_FOUND", "RESOURCE_EXHAUSTED"]):
                         continue
                     else:
                         return f'{{"error": "AI gagal ({model_name}): {error_str}"}}'
             
             if attempt < MAX_RETRIES - 1:
-                print(f"⏳ Semua model rate limited. Retry dalam {RETRY_WAIT_SEC} detik...")
-                time.sleep(RETRY_WAIT_SEC)
+                print(f"⏳ Semua model gagal. Menunggu retry attempt {attempt+2}/{MAX_RETRIES}...")
+                elapsed = 0
+                while elapsed < RETRY_WAIT_SEC:
+                    remaining = RETRY_WAIT_SEC - elapsed
+                    print(f"   ⏱️ {remaining} detik lagi...")
+                    sleep_chunk = min(30, remaining)
+                    time.sleep(sleep_chunk)
+                    elapsed += sleep_chunk
+                print(f"🔄 Memulai attempt {attempt+2}...")
         
-        return '{"error": "Semua model AI rate limited setelah retry. Sinyal dilewati."}'
+        return '{"error": "Semua model AI gagal setelah semua retry. Sinyal dilewati."}'
         
     except Exception as e:
         return f'{{"error": "AI gagal: {str(e)}"}}'

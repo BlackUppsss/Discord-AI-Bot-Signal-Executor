@@ -259,6 +259,14 @@ def handle_open(data, symbol_ccxt):
         )
     
     print(f"✅ ORDER BERHASIL! ID: {order.get('id')}")
+    return {
+        "action": "OPEN",
+        "symbol": symbol_ccxt,
+        "side": side,
+        "entry_price": entry_price,
+        "sl_price": sl_price,
+        "order_type": order_type_str
+    }
 
 
 def handle_close(data, symbol_ccxt):
@@ -421,9 +429,10 @@ def execute_trade(signal_json):
         print(f"{'='*50}")
         
         if action == "OPEN":
-            handle_open(data, symbol_ccxt)
+            return handle_open(data, symbol_ccxt)
         elif action == "CLOSE":
             handle_close(data, symbol_ccxt)
+            return {"action": "CLOSE", "symbol": symbol_ccxt}
         elif action == "CANCEL":
             handle_cancel(data, symbol_ccxt)
         elif action == "MOVE_SL":
@@ -432,6 +441,8 @@ def execute_trade(signal_json):
             handle_take_profit(data, symbol_ccxt)
         else:
             print(f"⚠️ Action '{action}' tidak dikenali. Skip.")
+            
+        return None
         
     except Exception as e:
         print(f"🚨 [TRADE ERROR] {e}")
