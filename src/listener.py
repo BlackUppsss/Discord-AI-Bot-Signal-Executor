@@ -170,7 +170,7 @@ class SignalListener(discord.Client):
                                 trade_result["sl_price"],
                                 trade_result.get("order_type", "MARKET")
                             ))
-                        elif trade_result.get("action") == "CLOSE":
+                        elif trade_result.get("action") in ("CLOSE", "CANCEL"):
                             auto_be.cancel_monitor(trade_result["symbol"])
             except Exception as e:
                 print(f"🚨 [BACKGROUND ERROR] Gagal proses sinyal: {e}")

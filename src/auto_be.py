@@ -187,7 +187,11 @@ async def price_monitor_task(symbol_ccxt, side, entry_price, sl_price, order_typ
                         pos = await asyncio.to_thread(trading.get_open_position, symbol_ccxt, side)
                         if not pos or float(pos.get("contracts", 0)) <= 0:
                             if not is_filled:
-                                pass
+                                # Cek apakah pending LIMIT order masih ada di Bitget
+                                orders = await asyncio.to_thread(trading.get_open_orders, symbol_ccxt, side)
+                                if not orders:
+                                    print(f"[AUTO BE] Pending order {symbol_ccxt} sudah dibatalkan manual. Monitor dibatalkan.")
+                                    return
                             else:
                                 print(f"[AUTO BE] Posisi {symbol_ccxt} sudah ditutup manual. Monitor dibatalkan.")
                                 return

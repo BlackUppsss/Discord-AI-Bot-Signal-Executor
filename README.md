@@ -19,7 +19,7 @@ Bot otomatis yang mendengarkan sinyal *trading* dari *channel* Discord tertentu,
 
 ## 🧠 Atur Rules AI Parser
 
-Rules untuk interpretasi sinyal AI **tidak diatur dari `.env`**, tetapi langsung di kode:
+Rules untuk interpretasi sinyal AI **Sesuaikan dengan sinyal discord anda** :
 
 - File: `src/ai_parser.py`
 - Fungsi: `parse_signal_with_ai(...)`

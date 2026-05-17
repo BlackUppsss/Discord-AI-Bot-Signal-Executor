@@ -500,6 +500,7 @@ def execute_trade(signal_json):
             return {"action": "CLOSE", "symbol": symbol_ccxt}
         elif action == "CANCEL":
             handle_cancel(data, symbol_ccxt)
+            return {"action": "CANCEL", "symbol": symbol_ccxt}
         elif action == "MOVE_SL":
             handle_move_sl(data, symbol_ccxt)
         elif action == "TAKE_PROFIT":
