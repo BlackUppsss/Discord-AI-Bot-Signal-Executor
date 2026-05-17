@@ -2,370 +2,27 @@
 
 --- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
 [INPUT PESAN]:
-BTC
-SPOT/short SWING DCA
-RISK 1%
-
-ENTRY : 76430
-SL : 78130
+test close horeg
 [OUTPUT JSON GEMINI]:
-{
-    "is_signal": true,
-    "action": "OPEN",
-    "position_side": "SHORT",
-    "symbol": "BTCUSDT",
-    "leverage": null,
-    "entry_zone": [
-        76430
-    ],
-    "take_profit": [],
-    "stop_loss": 78130,
-    "order_type": "LIMIT",
-    "reason": "The text provides an entry point, stop loss, and position side for BTC, indicating an instruction to open a new short position."
-}
+{"error": "AI gagal (gemini-2.5-flash): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API Key not found. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API Key not found. Please pass a valid API key.'}]}}"}
 --------------------------------------------------
 
 --- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
 [INPUT PESAN]:
-BTC
-SPOT/short SWING DCA
-RISK 1%
-
-ENTRY : 76530
-SL : 78130
-[OUTPUT JSON GEMINI]:
-{
-    "is_signal": true,
-    "action": "OPEN",
-    "position_side": "SHORT",
-    "symbol": "BTCUSDT",
-    "leverage": null,
-    "entry_zone": [
-        76530
-    ],
-    "take_profit": [],
-    "stop_loss": 78130,
-    "order_type": "LIMIT",
-    "reason": "Teks ini berisi instruksi untuk membuka posisi short BTC dengan entry dan stop loss yang spesifik."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-BTC
-SPOT/short SWING DCA
-RISK 1%
-
-ENTRY : 77530
-SL : 78130
-[OUTPUT JSON GEMINI]:
-{"error": "Gagal memproses dengan AI: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}" }
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-BTC
-SPOT/short SWING DCA
-RISK 1%
-
-ENTRY : 77530
-SL : 78130
-[OUTPUT JSON GEMINI]:
-{
-    "is_signal": true,
-    "action": "OPEN",
-    "position_side": "SHORT",
-    "symbol": "BTCUSDT",
-    "leverage": null,
-    "entry_zone": [
-        77530
-    ],
-    "take_profit": [],
-    "stop_loss": 78130,
-    "order_type": "LIMIT",
-    "reason": "Teks berisi instruksi untuk membuka posisi SHORT baru dengan titik masuk dan stop loss yang spesifik."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-BTC
-SPOT/short SWING DCA
-RISK 1%
-
-ENTRY : 77530
-SL : 78130
-[OUTPUT JSON GEMINI]:
-{
-    "is_signal": true,
-    "action": "OPEN",
-    "position_side": "SHORT",
-    "symbol": "BTCUSDT",
-    "leverage": null,
-    "entry_zone": [
-        77530
-    ],
-    "take_profit": [],
-    "stop_loss": 78130,
-    "order_type": "LIMIT",
-    "reason": "Teks berisi perintah buka posisi baru dengan titik masuk dan stop loss yang jelas."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-BTC
-SPOT/short SWING DCA
-RISK 1%
-
-ENTRY : 77530
-SL : 78130
+test close horeg
 [OUTPUT JSON GEMINI]:
 {
   "is_signal": true,
-  "action": "OPEN",
-  "position_side": "SHORT",
-  "symbol": "BTCUSDT",
-  "leverage": null,
-  "entry_zone": [
-    77530
-  ],
-  "take_profit": [],
-  "stop_loss": 78130,
-  "order_type": "LIMIT",
-  "tp_percentage": null,
-  "reason": "Sinyal baru untuk buka posisi SHORT BTCUSDT."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-BTC
-SPOT/long SWING DCA
-RISK 1%
-
-ENTRY : 77530
-SL : 78130
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "OPEN",
-  "position_side": "LONG",
-  "symbol": "BTCUSDT",
-  "leverage": null,
-  "entry_zone": [
-    77530
-  ],
-  "take_profit": [],
-  "stop_loss": 78130,
-  "order_type": "LIMIT",
-  "tp_percentage": null,
-  "reason": "Sinyal buka posisi long untuk BTC dengan harga entry dan stop loss."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-BTC
-SPOT/long SWING DCA
-RISK 1%
-
-ENTRY : 77530
-SL : 76130
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "OPEN",
-  "position_side": "LONG",
-  "symbol": "BTCUSDT",
-  "leverage": null,
-  "entry_zone": [
-    77530
-  ],
-  "take_profit": [],
-  "stop_loss": 76130,
-  "order_type": "LIMIT",
-  "tp_percentage": null,
-  "reason": "Sinyal untuk membuka posisi long BTC dengan entry dan stop loss yang ditentukan."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-cancel order eth
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "CANCEL",
+  "action": "CLOSE",
   "position_side": null,
-  "symbol": "ETHUSDT",
+  "symbol": null,
   "leverage": null,
   "entry_zone": [],
   "take_profit": [],
   "stop_loss": null,
   "order_type": null,
   "tp_percentage": null,
-  "reason": "Perintah untuk membatalkan order ETH."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-cancel btc
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "CANCEL",
-  "position_side": "ALL",
-  "symbol": "BTCUSDT",
-  "leverage": null,
-  "entry_zone": [],
-  "take_profit": [],
-  "stop_loss": null,
-  "order_type": null,
-  "tp_percentage": null,
-  "reason": "Perintah batalkan semua order untuk BTC."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-long eth now
-sl 2300
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "OPEN",
-  "position_side": "LONG",
-  "symbol": "ETHUSDT",
-  "leverage": null,
-  "entry_zone": [],
-  "take_profit": [],
-  "stop_loss": 2300,
-  "order_type": "MARKET",
-  "tp_percentage": null,
-  "reason": "Membuka posisi long ETH pada harga pasar dengan stop loss."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-close
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "CLOSE",
-  "position_side": "LONG",
-  "symbol": "ETHUSDT",
-  "leverage": null,
-  "entry_zone": [],
-  "take_profit": [],
-  "stop_loss": null,
-  "order_type": "MARKET",
-  "tp_percentage": null,
-  "reason": "Perintah untuk menutup posisi aktif ETHUSDT."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-btc long now
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "OPEN",
-  "position_side": "LONG",
-  "symbol": "BTCUSDT",
-  "leverage": null,
-  "entry_zone": [],
-  "take_profit": [],
-  "stop_loss": null,
-  "order_type": "MARKET",
-  "tp_percentage": null,
-  "reason": "Sinyal untuk membuka posisi long BTCUSDT secara instan."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-eth long now sl 2200
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "OPEN",
-  "position_side": "LONG",
-  "symbol": "ETHUSDT",
-  "leverage": null,
-  "entry_zone": [],
-  "take_profit": [],
-  "stop_loss": 2200,
-  "order_type": "MARKET",
-  "tp_percentage": null,
-  "reason": "Sinyal untuk membuka posisi long ETHUSDT sekarang dengan stop loss."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-btc long now sl 81000
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "OPEN",
-  "position_side": "LONG",
-  "symbol": "BTCUSDT",
-  "leverage": null,
-  "entry_zone": [],
-  "take_profit": [],
-  "stop_loss": 81000,
-  "order_type": "MARKET",
-  "tp_percentage": null,
-  "reason": "Sinyal untuk membuka posisi long BTCUSDT secara instan dengan stop loss."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-crp long now sl 14400
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "OPEN",
-  "position_side": "LONG",
-  "symbol": "CRPUSDT",
-  "leverage": null,
-  "entry_zone": [],
-  "take_profit": [],
-  "stop_loss": 14400,
-  "order_type": "MARKET",
-  "tp_percentage": null,
-  "reason": "Open a new long position at market price with a stop loss."
-}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-xrp long now sl 14400
-[OUTPUT JSON GEMINI]:
-{"error": "AI gagal (gemini-1.5-flash): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}"}
---------------------------------------------------
-
---- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
-[INPUT PESAN]:
-close eth
-[OUTPUT JSON GEMINI]:
-{
-  "is_signal": true,
-  "action": "CLOSE",
-  "position_side": "LONG",
-  "symbol": "ETHUSDT",
-  "leverage": null,
-  "entry_zone": [],
-  "take_profit": [],
-  "stop_loss": null,
-  "order_type": "MARKET",
-  "tp_percentage": null,
-  "reason": "Perintah untuk menutup posisi ETH."
+  "reason": "Perintah untuk menutup posisi."
 }
 --------------------------------------------------
 
@@ -401,5 +58,677 @@ __Max Loss / Risk Per Trade 0.5% of Total Trading Balance__
   "order_type": "MARKET",
   "tp_percentage": null,
   "reason": "bear struktur"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close all
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "ALL",
+  "symbol": null,
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah untuk menutup semua posisi, namun tidak ada posisi yang terbuka."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 80700
+
+🔖 ENTRY REASON : bear struktur
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 80700,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "bear struktur"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah untuk menutup posisi."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 80700
+
+🔖 ENTRY REASON : bear struktur
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 80700,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "bear struktur close"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 80700
+
+🔖 ENTRY REASON : bear struktur
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": null,
+  "take_profit": [],
+  "stop_loss": 80700,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "bear struktur close"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah tutup posisi tanpa detail harga dari sinyal baru."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 80800
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 80800,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup to open a new short position for BTC."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah tutup posisi."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 79300
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 79300,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup short-sell for BTC."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah tutup posisi."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 79300
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 79300,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal untuk membuka posisi short sell pada BTC dengan entri market dan stop loss."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah tutup posisi."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 79100
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 79100,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup short-sell for BTC."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78500
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78500,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "SCALP SETUP - SHORT-sell signal with market entry."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78500
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78500,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "New scalp setup to short BTC with market entry."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78100
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78100,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal buka posisi short baru untuk BTC pada harga pasar."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah tutup posisi aktif."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78100
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78100,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal buka posisi short dengan entry market."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78100
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78100,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "New scalp setup for short-sell BTC with market entry."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78300
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78300,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup short-sell for BTC with market entry."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": null,
+  "take_profit": null,
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah tutup posisi aktif BTCUSDT."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78300
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78300,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal setup short-sell untuk BTC dengan entry market."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78000
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78000,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup short-sell for BTC"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah tutup posisi."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78000
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78000,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "SCALP SETUP - SHORT-sell signal"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $ETH
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 2190
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "ETHUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 2190,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "SCALP SETUP - SHORT-sell for ETH"
 }
 --------------------------------------------------

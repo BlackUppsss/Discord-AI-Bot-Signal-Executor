@@ -2,3 +2,5 @@ discord.py-self
 python-dotenv
 google-genai
 ccxt[async]
+aiohttp
+websockets

@@ -36,6 +36,38 @@ be_moved: dict[str, bool] = {}
 # ─────────────────────────────────────────────
 # Inisialisasi exchange (async)
 # ─────────────────────────────────────────────
+def bitget_ws_config(api_key, secret, password):
+    return {
+        "apiKey": api_key,
+        "secret": secret,
+        "password": password,
+        "enableRateLimit": True,
+        "has": {
+            "fetchCurrencies": False,
+        },
+        "options": {
+            "defaultType": "swap",
+            "defaultSubType": "linear",
+            "fetchMarkets": {
+                "types": ["swap"],
+            },
+        },
+    }
+
+
+def patch_usdt_futures_market_loader(exchange, log_prefix):
+    original = exchange.publicMixGetV2MixMarketContracts
+
+    async def usdt_futures_only(params={}):
+        product_type = params.get("productType")
+        if product_type == "USDT-FUTURES":
+            return await original(params)
+        return {"code": "00000", "msg": "success", "data": []}
+
+    exchange.publicMixGetV2MixMarketContracts = usdt_futures_only
+    print(f"{log_prefix} Bitget market loader restricted to productType=USDT-FUTURES")
+
+
 def build_exchange() -> ccxtpro.bitget:
     api_key  = os.getenv("BITGET_API_KEY")
     secret   = os.getenv("BITGET_API_SECRET")
@@ -44,19 +76,20 @@ def build_exchange() -> ccxtpro.bitget:
     if not all([api_key, secret, password]):
         raise EnvironmentError("❌  BITGET_API_KEY / SECRET / PASSPHRASE belum diisi di .env!")
 
-    exchange = ccxtpro.bitget({
-        "apiKey":          api_key,
-        "secret":          secret,
-        "password":        password,
-        "enableRateLimit": True,
-        "options": {
-            "defaultType": "swap",
-        },
-    })
+    exchange = ccxtpro.bitget(bitget_ws_config(api_key, secret, password))
+    patch_usdt_futures_market_loader(exchange, "[MONITOR WS]")
 
     if SANDBOX_MODE:
         exchange.set_sandbox_mode(True)
 
+    fetch_market_types = exchange.options.get("fetchMarkets", {}).get("types")
+    print(
+        "[MONITOR WS] ccxt.pro.bitget initialized | "
+        f"sandbox={SANDBOX_MODE} | "
+        f"watchTickers={exchange.has.get('watchTickers')} | "
+        f"fetchCurrencies={exchange.has.get('fetchCurrencies')} | "
+        f"fetchMarkets.types={fetch_market_types}"
+    )
     return exchange
 
 
@@ -190,6 +223,55 @@ async def _fallback_set_sl(exchange: ccxtpro.bitget, pos: dict, new_sl: float):
 def supports_watch_tickers(exchange: ccxtpro.bitget) -> bool:
     return bool(getattr(exchange, "has", {}).get("watchTickers"))
 
+
+def synthetic_usdt_swap_market(symbol_ccxt):
+    base = symbol_ccxt.split("/")[0]
+    market_id = f"{base}USDT"
+    return {
+        "id": market_id,
+        "symbol": symbol_ccxt,
+        "base": base,
+        "quote": "USDT",
+        "settle": "USDT",
+        "baseId": base,
+        "quoteId": "USDT",
+        "settleId": "USDT",
+        "type": "swap",
+        "spot": False,
+        "margin": False,
+        "swap": True,
+        "future": False,
+        "option": False,
+        "active": True,
+        "contract": True,
+        "linear": True,
+        "inverse": False,
+        "contractSize": 1,
+        "precision": {"amount": 0.000001, "price": 0.000001},
+        "limits": {"amount": {"min": None, "max": None}, "price": {"min": None, "max": None}, "cost": {"min": None, "max": None}},
+        "info": {"symbol": market_id, "symbolType": "perpetual"},
+    }
+
+
+def seed_usdt_swap_markets(exchange, symbols: list[str]) -> None:
+    exchange.set_markets([synthetic_usdt_swap_market(symbol) for symbol in symbols])
+
+
+async def load_swap_markets(exchange: ccxtpro.bitget, symbols: list[str]) -> None:
+    print(f"[MONITOR WS] Seeding USDT-FUTURES market metadata for {symbols}...")
+    seed_usdt_swap_markets(exchange, symbols)
+    for symbol in symbols:
+        market = exchange.market(symbol)
+        print(
+            "[MONITOR WS] Market resolved | "
+            f"symbol={market.get('symbol')} | "
+            f"id={market.get('id')} | "
+            f"type={market.get('type')} | "
+            f"swap={market.get('swap')} | "
+            f"linear={market.get('linear')}"
+        )
+
+
 async def watch_prices_loop(exchange: ccxtpro.bitget, positions_ref: list[dict]):
     """Subscribe ke ticker semua symbol yang aktif."""
     last_symbols = None
@@ -208,7 +290,22 @@ async def watch_prices_loop(exchange: ccxtpro.bitget, positions_ref: list[dict])
 
         if symbols != last_symbols:
             print(f"📡 Mulai memantau WebSocket untuk: {symbols}")
-            last_symbols = symbols
+            try:
+                await load_swap_markets(exchange, symbols)
+                print(f"[MONITOR WS] Subscribing tickers | instType=USDT-FUTURES | channel=ticker | symbols={symbols}")
+                last_symbols = symbols
+            except ccxtpro.NetworkError as e:
+                print(f"WebSocket market bootstrap gagal ({e}), retry dalam 5 detik...")
+                await asyncio.sleep(5)
+                continue
+            except ccxtpro.ExchangeError as e:
+                print(f"Exchange market bootstrap error: {e}")
+                await asyncio.sleep(5)
+                continue
+            except Exception as e:
+                print(f"Market bootstrap error: {e}")
+                await asyncio.sleep(5)
+                continue
 
         try:
             if not supports_watch_tickers(exchange):
@@ -300,9 +397,7 @@ async def main():
     print(f"   Mode         : {'DEMO/SANDBOX' if SANDBOX_MODE else '⚠️  LIVE'}")
     print("=" * 50)
 
-    print("⏳ Loading markets dari Bitget...")
-    await exchange.load_markets()
-    print("✅ Markets loaded.\n")
+    print("[MONITOR WS] Skip startup load_markets; market metadata is seeded per active USDT-FUTURES symbol.\n")
 
     shared_positions: list[dict] = []
 

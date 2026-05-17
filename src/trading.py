@@ -7,6 +7,74 @@ load_dotenv()
 
 SANDBOX_MODE = os.getenv("BITGET_SANDBOX", "true").lower() == "true"
 
+def bitget_futures_config(api_key, secret, password):
+    return {
+        'apiKey': api_key,
+        'secret': secret,
+        'password': password,
+        'enableRateLimit': True,
+        'has': {
+            'fetchCurrencies': False,
+        },
+        'options': {
+            'defaultType': 'swap',
+            'defaultSubType': 'linear',
+            'fetchMarkets': {
+                'types': ['swap'],
+            },
+        },
+    }
+
+def patch_usdt_futures_market_loader(exchange):
+    original = exchange.publicMixGetV2MixMarketContracts
+
+    def usdt_futures_only(params={}):
+        product_type = params.get('productType')
+        if product_type == 'USDT-FUTURES':
+            return original(params)
+        return {'code': '00000', 'msg': 'success', 'data': []}
+
+    exchange.publicMixGetV2MixMarketContracts = usdt_futures_only
+    print("[TRADING] Bitget market loader restricted to productType=USDT-FUTURES")
+
+def synthetic_usdt_swap_market(symbol_ccxt):
+    base = symbol_ccxt.split('/')[0]
+    market_id = f"{base}USDT"
+    return {
+        'id': market_id,
+        'symbol': symbol_ccxt,
+        'base': base,
+        'quote': 'USDT',
+        'settle': 'USDT',
+        'baseId': base,
+        'quoteId': 'USDT',
+        'settleId': 'USDT',
+        'type': 'swap',
+        'spot': False,
+        'margin': False,
+        'swap': True,
+        'future': False,
+        'option': False,
+        'active': True,
+        'contract': True,
+        'linear': True,
+        'inverse': False,
+        'contractSize': 1,
+        'precision': {'amount': 0.000001, 'price': 0.000001},
+        'limits': {'amount': {'min': None, 'max': None}, 'price': {'min': None, 'max': None}, 'cost': {'min': None, 'max': None}},
+        'info': {'symbol': market_id, 'symbolType': 'perpetual'},
+    }
+
+def ensure_usdt_swap_market(symbol_ccxt):
+    if not bitget:
+        return
+    existing = getattr(bitget, 'markets', None) or {}
+    markets = list(existing.values())
+    if symbol_ccxt not in existing:
+        markets.append(synthetic_usdt_swap_market(symbol_ccxt))
+        bitget.set_markets(markets)
+        print(f"[TRADING] Seeded USDT-FUTURES market metadata for {symbol_ccxt}")
+
 def init_bitget():
     api_key = os.getenv('BITGET_API_KEY')
     secret = os.getenv('BITGET_API_SECRET')
@@ -15,25 +83,19 @@ def init_bitget():
     if not api_key or not secret or not password:
         return None
         
-    exchange = ccxt.bitget({
-        'apiKey': api_key,
-        'secret': secret,
-        'password': password,
-        'enableRateLimit': True,
-        'options': {
-            'defaultType': 'swap',
-        }
-    })
+    exchange = ccxt.bitget(bitget_futures_config(api_key, secret, password))
+    patch_usdt_futures_market_loader(exchange)
     
     if SANDBOX_MODE:
         exchange.set_sandbox_mode(True)
+    print(
+        "[TRADING] Bitget futures-only config | "
+        f"fetchCurrencies={exchange.has.get('fetchCurrencies')} | "
+        f"fetchMarkets.types={exchange.options.get('fetchMarkets', {}).get('types')}"
+    )
     print(f"🔌 Bitget mode: {'DEMO/SANDBOX' if SANDBOX_MODE else '⚠️ LIVE'}")
     
-    try:
-        exchange.load_markets()
-        print("✅ Bitget markets loaded.")
-    except Exception as e:
-        print(f"⚠️ Gagal load markets saat startup: {e}")
+    print("[TRADING] Skip startup load_markets; market metadata is seeded per USDT-FUTURES symbol.")
     
     return exchange
 
@@ -184,6 +246,7 @@ def handle_open(data, symbol_ccxt):
     side = validate_side(data)
     if not side:
         return
+    ensure_usdt_swap_market(symbol_ccxt)
     
     order_type_str = data.get("order_type", "LIMIT").upper()
     
@@ -383,6 +446,7 @@ def handle_take_profit(data, symbol_ccxt):
     side = validate_side(data)
     if not side:
         return
+    ensure_usdt_swap_market(symbol_ccxt)
     
     tp_percentage = data.get("tp_percentage", 100)
     
@@ -424,6 +488,7 @@ def execute_trade(signal_json):
             print("❌ Symbol tidak ditemukan di sinyal.")
             return
         
+        ensure_usdt_swap_market(symbol_ccxt)
         print(f"\n{'='*50}")
         print(f"📨 Action: {action} | Symbol: {symbol_ccxt} | Side: {data.get('position_side')}")
         print(f"{'='*50}")

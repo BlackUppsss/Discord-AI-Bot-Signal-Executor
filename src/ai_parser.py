@@ -35,6 +35,7 @@ Rules:
 - KUTIPAN (baris diawali "> " atau "[**Replying to") ATAU teks di bawah [MEMBALAS PESAN SEBELUMNYA]: Gunakan HANYA untuk mencari konteks nama Koin (symbol) atau arah (LONG/SHORT).
 - BANTUAN KONTEKS: Jika pesan Discord menyuruh CLOSE/MOVE_SL/TP tapi tidak menyebutkan nama koin, Anda BOLEH menebak koin dari daftar Posisi Aktif Saat Ini di Bitget.
 - Aksi utama (OPEN/CLOSE/CANCEL/MOVE_SL/TAKE_PROFIT) WAJIB diambil HANYA dari teks BARU di luar kutipan (contoh teks baru: "hit stoploss", "tutup"). Jangan jadikan isi kutipan sebagai perintah sinyal baru!
+- Jika ada pesan hit tp maks atau yang mengisyaratkan bahwa sudah menyentuh TP maksimum maka berarti itu sinyal untuk take action close atau tp.
 - is_signal: true HANYA jika ada perintah BUKA/TUTUP/BATALKAN/PINDAH SL/TAKE PROFIT yang BARU.
 - Obrolan biasa, pamer profit, update harga → is_signal: false.
 

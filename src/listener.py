@@ -1,9 +1,9 @@
 import discord
 import os
-import json
 import time
 import asyncio
 from collections import defaultdict
+from collections import deque
 from dotenv import load_dotenv
 import ai_parser
 import trading
@@ -19,6 +19,10 @@ NO_IMAGE_CHANNEL_IDS = [
     c.strip() for c in os.getenv('NO_IMAGE_CHANNEL_IDS', '').split(',') if c.strip()
 ]
 
+READ_ATTACHMENTS = os.getenv('READ_ATTACHMENTS', 'false').lower() == 'true'
+FETCH_REPLY_CONTEXT = os.getenv('FETCH_REPLY_CONTEXT', 'false').lower() == 'true'
+MAX_CONCURRENT_SIGNALS = int(os.getenv('MAX_CONCURRENT_SIGNALS', '1'))
+
 TRUSTED_AUTHORS = [
     a.strip() for a in os.getenv('TRUSTED_AUTHOR_IDS', '').split(',') if a.strip()
 ]
@@ -32,6 +36,8 @@ SIGNAL_KEYWORDS = [
 
 COOLDOWN_SEC = float(os.getenv('MESSAGE_COOLDOWN_SEC', '3'))
 last_call_time: dict[int, float] = defaultdict(float)
+_processed_message_ids = deque(maxlen=5000)
+_processed_message_ids_set = set()
 
 LOG_FILE = "dummy_signals.txt"
 MAX_LOG_SIZE = 5 * 1024 * 1024
@@ -46,6 +52,10 @@ def rotate_log():
         print(f"📄 Log dirotasi: {LOG_FILE} → {old}")
 
 class SignalListener(discord.Client):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.signal_semaphore = asyncio.Semaphore(max(1, MAX_CONCURRENT_SIGNALS))
+
     async def on_ready(self):
         print(f'[INFO] Berhasil login sebagai: {self.user.name}')
         print(f'Mendengarkan Sinyal di channel dengan ID: {TARGET_CHANNEL_IDS}...')
@@ -58,6 +68,15 @@ class SignalListener(discord.Client):
         if str(message.channel.id) not in TARGET_CHANNEL_IDS:
             return
 
+        if message.id in _processed_message_ids_set:
+            return
+        _processed_message_ids.append(message.id)
+        _processed_message_ids_set.add(message.id)
+        if len(_processed_message_ids_set) > _processed_message_ids.maxlen:
+            while len(_processed_message_ids_set) > _processed_message_ids.maxlen:
+                old_id = _processed_message_ids.popleft()
+                _processed_message_ids_set.discard(old_id)
+
         if TRUSTED_AUTHORS and str(message.author.id) not in TRUSTED_AUTHORS:
             return
 
@@ -68,7 +87,7 @@ class SignalListener(discord.Client):
 
         content = message.content
         
-        if message.reference and message.reference.message_id:
+        if FETCH_REPLY_CONTEXT and message.reference and message.reference.message_id:
             try:
                 replied_msg = await message.channel.fetch_message(message.reference.message_id)
                 content = f"[MEMBALAS PESAN SEBELUMNYA (Konteks Koin)]:\n{replied_msg.content}\n\n[PESAN BARU SAAT INI (Perintah Baru)]:\n{content}"
@@ -86,11 +105,12 @@ class SignalListener(discord.Client):
 
         image_bytes_list = []
         skip_image = str(message.channel.id) in NO_IMAGE_CHANNEL_IDS
+        can_read_attachments = READ_ATTACHMENTS and not skip_image
         if message.attachments:
             content += "\n[GAMBAR/ATTACHMENT DITEMUKAN]:"
             for attachment in message.attachments:
                 content += f"\n- {attachment.url}"
-                if not skip_image and attachment.content_type and attachment.content_type.startswith('image/'):
+                if can_read_attachments and attachment.content_type and attachment.content_type.startswith('image/'):
                     img_data = await attachment.read()
                     image_bytes_list.append({
                         "mime_type": attachment.content_type,
@@ -118,42 +138,42 @@ class SignalListener(discord.Client):
 
     async def _process_signal(self, content, image_bytes_list, author_name):
         """Proses sinyal di background agar on_message tidak terblokir."""
-        try:
-            bitget_context = await asyncio.to_thread(trading.get_account_context_summary)
+        async with self.signal_semaphore:
+            try:
+                bitget_context = await asyncio.to_thread(trading.get_account_context_summary)
 
-            ai_result = await asyncio.to_thread(
-                ai_parser.parse_signal_with_ai, content, image_bytes_list, bitget_context
-            )
+                ai_result = await asyncio.to_thread(
+                    ai_parser.parse_signal_with_ai, content, image_bytes_list, bitget_context
+                )
 
-            print("Hasil Analisa JSON:")
-            print(ai_result)
-            print("====================================\n")
+                print("Hasil Analisa JSON:")
+                print(ai_result)
+                print("====================================\n")
             
-            rotate_log()
+                rotate_log()
 
-            with open(LOG_FILE, "a", encoding="utf-8") as f:
-                f.write(f"\n\n--- HASIL ANALISA LANGSUNG DARI DISCORD ({author_name}) ---\n")
-                f.write(f"[INPUT PESAN]:\n{content}\n")
-                f.write(f"[OUTPUT JSON GEMINI]:\n{ai_result}\n")
-                f.write("-" * 50)
+                with open(LOG_FILE, "a", encoding="utf-8") as f:
+                    f.write(f"\n\n--- HASIL ANALISA LANGSUNG DARI DISCORD ({author_name}) ---\n")
+                    f.write(f"[INPUT PESAN]:\n{content}\n")
+                    f.write(f"[OUTPUT JSON GEMINI]:\n{ai_result}\n")
+                    f.write("-" * 50)
                 
-            if "error" not in ai_result.lower():
-                trade_result = await asyncio.to_thread(trading.execute_trade, ai_result)
-                if trade_result:
-                    import auto_be
-                    if trade_result.get("action") == "OPEN":
-                        asyncio.create_task(auto_be.price_monitor_task(
-                            trade_result["symbol"],
-                            trade_result["side"],
-                            trade_result["entry_price"],
-                            trade_result["sl_price"],
-                            trade_result.get("order_type", "MARKET")
-                        ))
-                    elif trade_result.get("action") == "CLOSE":
-                        # Matikan monitor seketika saat ada perintah CLOSE dari AI
-                        auto_be.cancel_monitor(trade_result["symbol"])
-        except Exception as e:
-            print(f"🚨 [BACKGROUND ERROR] Gagal proses sinyal: {e}")
+                if "error" not in ai_result.lower():
+                    trade_result = await asyncio.to_thread(trading.execute_trade, ai_result)
+                    if trade_result:
+                        import auto_be
+                        if trade_result.get("action") == "OPEN":
+                            asyncio.create_task(auto_be.price_monitor_task(
+                                trade_result["symbol"],
+                                trade_result["side"],
+                                trade_result["entry_price"],
+                                trade_result["sl_price"],
+                                trade_result.get("order_type", "MARKET")
+                            ))
+                        elif trade_result.get("action") == "CLOSE":
+                            auto_be.cancel_monitor(trade_result["symbol"])
+            except Exception as e:
+                print(f"🚨 [BACKGROUND ERROR] Gagal proses sinyal: {e}")
 
 if __name__ == '__main__':
     if not USER_TOKEN or not TARGET_CHANNEL_IDS:
