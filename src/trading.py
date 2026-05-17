@@ -335,9 +335,26 @@ def handle_open(data, symbol_ccxt):
         'marginMode': 'cross',
     }
     
+    default_rr = float(os.getenv('DEFAULT_TP_RR', '5'))
+    sl_distance = abs(entry_price - sl_price)
+    if side == 'LONG':
+        default_tp = entry_price + (sl_distance * default_rr)
+    else:
+        default_tp = entry_price - (sl_distance * default_rr)
+    
     take_profits = data.get("take_profit", [])
     if take_profits:
-        params['takeProfit'] = {'triggerPrice': float(take_profits[0])}
+        signal_tp = float(take_profits[0])
+        if side == 'LONG':
+            tp_price = min(signal_tp, default_tp)
+        else:
+            tp_price = max(signal_tp, default_tp)
+        print(f"🎯 TP dari sinyal: {signal_tp} | Default {default_rr}RR: {default_tp:.4f} → Pakai: {tp_price}")
+    else:
+        tp_price = default_tp
+        print(f"🎯 TP default {default_rr}RR: {tp_price:.4f}")
+    
+    params['takeProfit'] = {'triggerPrice': tp_price}
     
     print(f"\n🚀 {order_type_str} {order_side.upper()} {symbol_ccxt} | Size: {formatted_size} | Entry: {entry_price} | SL: {sl_price}")
     
