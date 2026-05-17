@@ -732,3 +732,314 @@ close
   "reason": "SCALP SETUP - SHORT-sell for ETH"
 }
 --------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78600
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78600,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup short-sell for BTC with market entry."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $ETH
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 2300
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "ETHUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 2300,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal pembukaan posisi short ETHUSDT dengan entry market dan stop loss di 2300."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - SHORT-sell
+
+🔘 Pair : $BTC
+
+🔘 Time frame : 15m
+
+🟡 Entry market cmp
+
+🔘 Target : di chart
+
+🔴 Stop loss : 78600
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": 78600,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup short-sell with market entry"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+btc hit running 1R
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": false,
+  "action": null,
+  "position_side": "SHORT",
+  "symbol": "BTCUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": null,
+  "tp_percentage": null,
+  "reason": "Update posisi BTC saat ini sudah profit 1R."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - LONG
+
+🔘 Pair : $LINK USDT
+
+🔘 Time frame : 15m
+
+🟡 Entry market 9700
+
+🔘 Target : di chart
+
+🔴 Stop loss : 9600
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "LINKUSDT",
+  "leverage": null,
+  "entry_zone": [
+    9700
+  ],
+  "take_profit": [],
+  "stop_loss": 9600,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup for a long position on LINKUSDT."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - LONG
+
+🔘 Pair : $LINK USDT
+
+🔘 Time frame : 15m
+
+🟡 Entry market 9700
+
+🔘 Target : di chart
+
+🔴 Stop loss : 9600
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "LINKUSDT",
+  "leverage": null,
+  "entry_zone": [
+    9700
+  ],
+  "take_profit": [],
+  "stop_loss": 9600,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Sinyal scalp setup long untuk LINKUSDT."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - LONG
+
+🔘 Pair : $LINK USDT
+
+🔘 Time frame : 15m
+
+🟡 Entry limit: 9700
+
+🔘 Target : di chart
+
+🔴 Stop loss : 9500
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "LINKUSDT",
+  "leverage": null,
+  "entry_zone": [
+    9700
+  ],
+  "take_profit": null,
+  "stop_loss": 9500,
+  "order_type": "LIMIT",
+  "tp_percentage": null,
+  "reason": "Sinyal baru untuk posisi long LINKUSDT."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - LONG
+
+🔘 Pair : $LINK USDT
+
+🔘 Time frame : 15m
+
+🟡 Entry limit: 9700
+
+🔘 Target : di chart
+
+🔴 Stop loss : 9500
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "LINKUSDT",
+  "leverage": null,
+  "entry_zone": [
+    9700
+  ],
+  "take_profit": [],
+  "stop_loss": 9500,
+  "order_type": "LIMIT",
+  "tp_percentage": null,
+  "reason": "Sinyal setup scalp long"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - LONG
+
+🔘 Pair : $LINK USDT
+
+🔘 Time frame : 15m
+
+🟡 Entry limit: 9700
+
+🔘 Target : di chart
+
+🔴 Stop loss : 9600
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "LINKUSDT",
+  "leverage": null,
+  "entry_zone": [
+    9700
+  ],
+  "take_profit": [],
+  "stop_loss": 9600,
+  "order_type": "LIMIT",
+  "tp_percentage": null,
+  "reason": "Sinyal buka posisi long untuk scalping."
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+☄️** SCALP SETUP - LONG
+
+🔘 Pair : $LINK USDT
+
+🔘 Time frame : 15m
+
+🟡 Entry market: 9.704
+
+🔘 Target : di chart
+
+🔴 Stop loss : 9.689
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "OPEN",
+  "position_side": "LONG",
+  "symbol": "LINKUSDT",
+  "leverage": null,
+  "entry_zone": [
+    9.704
+  ],
+  "take_profit": [],
+  "stop_loss": 9.689,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Scalp setup - Long"
+}
+--------------------------------------------------
+
+--- HASIL ANALISA LANGSUNG DARI DISCORD (blackupsss0_o) ---
+[INPUT PESAN]:
+close all
+[OUTPUT JSON GEMINI]:
+{
+  "is_signal": true,
+  "action": "CLOSE",
+  "position_side": "ALL",
+  "symbol": "LINKUSDT",
+  "leverage": null,
+  "entry_zone": [],
+  "take_profit": [],
+  "stop_loss": null,
+  "order_type": "MARKET",
+  "tp_percentage": null,
+  "reason": "Perintah untuk menutup semua posisi aktif."
+}
+--------------------------------------------------

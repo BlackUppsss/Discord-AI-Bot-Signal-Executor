@@ -175,14 +175,41 @@ def get_open_orders(symbol_ccxt, side=None):
         print(f"⚠️ Gagal cek open orders: {e}")
         return []
 
+FALLBACK_MAX_LEVERAGE = int(os.getenv('MAX_LEVERAGE', '125'))
+
+def get_max_leverage(symbol_ccxt):
+    """Fetch max leverage yang diizinkan Bitget untuk koin tertentu."""
+    try:
+        base = symbol_ccxt.split('/')[0]
+        inst_id = f"{base}USDT"
+        resp = bitget.publicMixGetV2MixMarketQueryMaxLeverage({
+            'productType': 'USDT-FUTURES',
+            'symbol': inst_id,
+        })
+        max_lev = int(resp.get('data', {}).get('maxLeverage', FALLBACK_MAX_LEVERAGE))
+        print(f"📎 Max leverage {symbol_ccxt}: {max_lev}x (dari Bitget API)")
+        return max_lev
+    except Exception as e:
+        print(f"⚠️ Gagal fetch max leverage ({e}), fallback ke {FALLBACK_MAX_LEVERAGE}x")
+        return FALLBACK_MAX_LEVERAGE
+
 def calculate_position_size(symbol, entry_price, sl_price):
+    """
+    Hitung position size berdasarkan risk management.
+    Return (size_coin, leverage) atau (0, 0) jika gagal.
+    
+    Logika:
+    1. Hitung notional agar rugi = RISK_PERCENTAGE% equity saat kena SL
+    2. Pakai max leverage dari Bitget API agar margin minimal
+    3. Tolak jika margin tetap melebihi MAX_POSITION_PCT% equity
+    """
     try:
         balance = bitget.fetch_balance()
         total_equity = balance.get('USDT', {}).get('total', 0)
         
         if total_equity <= 0:
             print("❌ [RISK] Saldo USDT kosong.")
-            return 0
+            return 0, 0
             
         risk_percentage = float(os.getenv('RISK_PERCENTAGE', '5'))
         risk_amount = total_equity * (risk_percentage / 100)
@@ -190,30 +217,35 @@ def calculate_position_size(symbol, entry_price, sl_price):
         
         if sl_distance == 0:
             print("❌ [RISK] Jarak SL 0%.")
-            return 0
+            return 0, 0
             
         position_size_usdt = risk_amount / sl_distance
-        
-        max_allowed = total_equity * (MAX_POSITION_PCT / 100)
-        if position_size_usdt > max_allowed:
-            print(f"⚠️ Size {position_size_usdt:.2f} USDT melebihi {MAX_POSITION_PCT}% equity. Dicap ke {max_allowed:.2f} USDT.")
-            position_size_usdt = max_allowed
-        
         position_size_coin = position_size_usdt / entry_price
         
         min_notional = float(os.getenv('MIN_ORDER_USDT', '5'))
         if position_size_usdt < min_notional:
             print(f"❌ Order terlalu kecil: ${position_size_usdt:.2f} < ${min_notional}")
-            return 0
+            return 0, 0
+        
+        max_leverage = get_max_leverage(symbol)
+        leverage_to_use = max_leverage
+        
+        actual_margin = position_size_usdt / leverage_to_use
+        
+        max_margin = total_equity * (MAX_POSITION_PCT / 100)
+        if actual_margin > max_margin:
+            print(f"❌ [RISK] Margin {actual_margin:.2f} USDT melebihi batas {max_margin:.2f} USDT ({MAX_POSITION_PCT}% equity) bahkan di {leverage_to_use}x. Order ditolak.")
+            return 0, 0
         
         print(f"💰 Equity: {total_equity:.2f} USDT | Risk: {risk_amount:.2f} USDT ({risk_percentage}%)")
-        print(f"📐 SL Distance: {sl_distance*100:.2f}% | Size: {position_size_coin:.4f} {symbol.split('/')[0]}")
+        print(f"📐 SL Distance: {sl_distance*100:.2f}% | Size: {position_size_coin:.4f} {symbol.split('/')[0]} ({position_size_usdt:.2f} USDT)")
+        print(f"📊 Leverage: {leverage_to_use}x (MAX) | Margin: {actual_margin:.2f} USDT ({actual_margin/total_equity*100:.1f}% equity)")
         
-        return position_size_coin
+        return position_size_coin, leverage_to_use
         
     except Exception as e:
         print(f"❌ [RISK ERROR] {e}")
-        return 0
+        return 0, 0
 
 
 def validate_side(data):
@@ -285,12 +317,11 @@ def handle_open(data, symbol_ccxt):
     if not validate_sl(side, entry_price, sl_price):
         return
     
-    size_coin = calculate_position_size(symbol_ccxt, entry_price, sl_price)
+    size_coin, leverage = calculate_position_size(symbol_ccxt, entry_price, sl_price)
     if size_coin <= 0:
         return
     formatted_size = float(bitget.amount_to_precision(symbol_ccxt, size_coin))
     
-    leverage = int(data.get("leverage") or os.getenv("DEFAULT_LEVERAGE", "20"))
     try:
         bitget.set_leverage(leverage, symbol_ccxt)
         print(f"⚙️ Leverage: {leverage}x")
